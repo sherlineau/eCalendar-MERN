@@ -1,15 +1,7 @@
-import axios from "axios";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import CalendarHeader from "./CalendarHeader";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
-
-
-/* TODO: 
-1. create a day object for each date of the CURRENT month
-2. go through appointments and add them to "date" object
-3. render previous/next months days to fill "6 weeks" if month does not start on sunday
-*/
 
 const getCalendar = (year, month, appointments) => {
   // initialize empty arrays for each section of month
@@ -42,19 +34,21 @@ const getCalendar = (year, month, appointments) => {
   for (let i = 1; i <= lastDayMonth.getDate(); i++) {
     // tempDate is a Date instance for each day
     let tempDate = new Date(year, month - 1, i);
-    let tempObj = {
-      date: tempDate,
-      events: [],
-    };
+    let tempArr = [];
 
     // this loops goes through the appointments array and add them to the correct date objects event
-    // IF it is the .toDateString() is the same 
+    // IF it is the .toDateString() is the same
     for (let i = 0; i < appointments.length; i++) {
       let appoint_start = new Date(appointments[i].start).toDateString();
-      if( appoint_start === tempDate.toDateString()) {
-        tempObj.events.push(appointments[i])
+      if (appoint_start === tempDate.toDateString()) {
+        tempArr.push(appointments[i]);
       }
     }
+
+    let tempObj = {
+      date: tempDate,
+      events: tempArr,
+    };
     currCalendarMonth.push(tempObj);
   }
 
@@ -71,72 +65,57 @@ const getCalendar = (year, month, appointments) => {
   return { prevCalendarMonth, currCalendarMonth, nextCalendarMonth };
 };
 
-const getFilteredAppointments = ( year, month, appointments) => {
-  let filtered = []
-  if (appointments !== null) {
-    for( let i = 0; i < appointments.length; i++) {
-      let temp = new Date(appointments[i].start)
-      if (temp.getMonth() === month && temp.getFullYear() === year ) {
-        filtered.push(appointments[i])
-      }
-    }
-  }
-  return filtered
-}
-
-const Calendar = ( props ) => {
-  const { appointments, heading, weekDays } = props
+const Calendar = (props) => {
+  const { heading, weekDays, appointments, onClickProp } = props;
   const today = new Date();
   const [year, setYear] = useState(today.getFullYear());
   const [month, setMonth] = useState(today.getMonth());
-  const [day, setDay] = useState(today);
-  const [filtered, setFiltered] = useState(getFilteredAppointments( year, month, appointments ))
+  const [calendar, setCalendar] = useState({});
 
-  // on load get appoints from database and FILTER it for the current month
+  // on load get appointments from api and load calendar
+  useEffect(() => {
+    setCalendar(getCalendar(year, month + 1, appointments));
+  }, [year, month, appointments]);
 
-  // get calendar based on month 
-  const [calendar, setCalendar] = useState(getCalendar(year, month + 1 , filtered))
   const { prevCalendarMonth, currCalendarMonth, nextCalendarMonth } = calendar;
 
   // on click functions
-  const pastMonth = async(e) => {
-    let temp = month
-    let tempYear = year
-    if (temp === 0) {
-      temp = 11;
+  const pastMonth = (e) => {
+    let tempMonth = month;
+    let tempYear = year;
+    if (tempMonth === 0) {
+      tempMonth = 11;
       tempYear--;
     } else {
-      temp--;
+      tempMonth--;
     }
     setYear(tempYear);
-    setMonth(temp);
-    await setFiltered(getFilteredAppointments(tempYear, temp , appointments))
-    setCalendar(getCalendar(tempYear,temp,filtered))
-  }
+    setMonth(tempMonth);
+    setCalendar(getCalendar(tempYear, tempMonth + 1, appointments));
+  };
 
-  const nextMonth = async(e) => {
-    let temp = month
-    let tempYear = year
-    if (temp === 11) {
+  const nextMonth = (e) => {
+    let tempMonth = month;
+    let tempYear = year;
+    if (tempMonth === 11) {
       // increment to next year and set month to index 0 [january]
-      temp = 0;
+      tempMonth = 0;
       tempYear++;
     } else {
       // get next month
-      temp++;
+      tempMonth++;
     }
     setYear(tempYear);
-    setMonth(temp);
-    await setFiltered(getFilteredAppointments(tempYear, temp , appointments))
-    setCalendar(getCalendar(tempYear,temp,filtered))
-  }
+    setMonth(tempMonth);
+    setCalendar(getCalendar(tempYear, tempMonth + 1, appointments));
+  };
 
-  const handleClick = day => {
-    setDay(day)
-  }
+  // sends "date" that was clicked back to parent Main.jsx to be used for Events panel
+  const handleOnClick = (day) => {
+    onClickProp(day);
+  };
 
   return (
-    <div className="section">
     <div className="section-left">
       <CalendarHeader month={month} year={year} heading={heading} />
       <div className="content">
@@ -151,48 +130,60 @@ const Calendar = ( props ) => {
               </div>
             );
           })}
-          {prevCalendarMonth.map((day, index) => {
-            return (
-              <div className="square greyed-out" key={index}>
-                <span className="day-number">{day}</span>
-              </div>
-            );
-          })}
-          {currCalendarMonth.map((day, index) => {
-            return (
-              <div
-                key={index}
-                onClick={(e) => handleClick(day.date)}
-                className="square"
-              >
-                <span
-                  className={`day-number ${
-                    day.date.getMonth() === today.getMonth() &&
-                    day.date.getDate() === today.getDate()
-                      ? "today"
-                      : ""
-                  }`}
-                >
-                  {day.date.getDate()}
-                </span>
-              </div>
-            );
-          })}
-          {nextCalendarMonth.map((day, index) => {
-            return (
-              <div className="square greyed-out" key={index}>
-                <span className="day-number">{day}</span>
-              </div>
-            );
-          })}
+          {prevCalendarMonth
+            ? prevCalendarMonth.map((day, index) => {
+                return (
+                  <div className="square greyed-out" key={index}>
+                    <span className="day-number">{day}</span>
+                  </div>
+                );
+              })
+            : ""}
+          {currCalendarMonth
+            ? currCalendarMonth.map((day, index) => {
+                return (
+                  <div
+                    key={index}
+                    onClick={(e) => handleOnClick(day.date)}
+                    className="square"
+                  >
+                    <div
+                      className={`square-top day-number ${
+                        day.date.getMonth() === today.getMonth() &&
+                        day.date.getDate() === today.getDate()
+                          ? "today"
+                          : ""
+                      }`}
+                    >
+                      {day.date.getDate()}
+                    </div>
+                    <div className="square-bottom">
+                      {day.events
+                        ? day.events.map((i,index) => {
+                            return <div className="dot" key={index} />;
+                          })
+                        : ""}
+                    </div>
+                  </div>
+                );
+              })
+            : ""}
+          {nextCalendarMonth
+            ? nextCalendarMonth.map((day, index) => {
+                return (
+                  <div className="square greyed-out" key={index}>
+                    <span className="day-number">{day}</span>
+                  </div>
+                );
+              })
+            : ""}
         </div>
         <div className="calendar-buttons">
           <AiOutlineArrowRight onClick={(e) => nextMonth()} className="btn" />
         </div>
       </div>
     </div>
-  </div>
-    )
+  );
 };
 
 export default Calendar;

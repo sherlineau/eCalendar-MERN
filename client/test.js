@@ -29,19 +29,21 @@ const getCalendar = (year, month, appointments) => {
   for (let i = 1; i <= lastDayMonth.getDate(); i++) {
     // tempDate is a Date instance for each day
     let tempDate = new Date(year, month - 1, i);
-    let tempObj = {
-      date: tempDate,
-      events: [],
-    };
-
+    let tempArr = [];
     // this loops goes through the appointments array and add them to the correct date objects event
-    // IF it is the .toDateString() is the same 
+    // IF it is the .toDateString() is the same
     for (let i = 0; i < appointments.length; i++) {
       let appoint_start = new Date(appointments[i].start).toDateString();
-      if( appoint_start === tempDate.toDateString()) {
-        tempObj.events.push(appointments[i])
+      if (appoint_start === tempDate.toDateString()) {
+        tempArr.push(appointments[i]);
       }
     }
+    
+    let tempObj = {
+      date: tempDate,
+      events: tempArr,
+    };
+    
     currCalendarMonth.push(tempObj);
   }
 
@@ -86,7 +88,36 @@ let appointments = [
     updatedAt: "2023-01-01T03:01:20.557Z",
     __v: 0,
   },
+  {
+    _id: "63b112a591897df2447ab5d7",
+    title: "testing filtered appointments by month",
+    start: "2023-01-25T17:00:00.000Z",
+    end: "2023-01-26T18:00:00.000Z",
+    people: "",
+    location: "",
+    description: "",
+    createdAt: "2023-01-01T04:57:09.162Z",
+    updatedAt: "2023-01-01T04:57:09.162Z",
+    __v: 0,
+  },
+  {
+    _id: "63b1cab5a0c92b746d9625ed",
+    title: "testing dots",
+    start: "2023-01-02T18:02:00.000Z",
+    end: "2023-01-02T19:02:00.000Z",
+    people: "",
+    location: "",
+    description: "",
+    createdAt: "2023-01-01T18:02:29.066Z",
+    updatedAt: "2023-01-01T18:02:29.066Z",
+    __v: 0,
+  },
 ];
 
-console.log(getCalendar(year, month + 1, appointments))
+const test = getCalendar(year, month + 1, appointments);
 
+for(let i = 0; i < test.currCalendarMonth.length ; i++) {
+  if (test.currCalendarMonth[i].events.length > 0) {
+    console.log(test.currCalendarMonth[i].events);
+  }
+}
