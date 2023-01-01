@@ -1,0 +1,458 @@
+@import url("https://fonts.googleapis.com/css2?family=Mohave:wght@300;400;500;600&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  margin: 0;
+  font-family: "Mohave", sans-serif;
+  font-family: "Raleway", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+h1 {
+  font-size: 2rem;
+}
+h2 {
+  font-size: 1.5rem;
+}
+h3 {
+  font-size: 1rem;
+}
+h4 {
+  font-size: 0.875rem;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.25;
+  margin-bottom: 0.75rem;
+}
+
+p {
+  margin-bottom: 1.25rem;
+}
+
+.section {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin: 0 auto;
+  height: 89vh;
+  overflow: hidden;
+  /* max-width: 1200px; */
+}
+
+@media screen and (min-width: 320px) and (max-width: 420px) {
+  .section {
+    display: block;
+    width: 100vw;
+    height: 100%;
+  }
+}
+
+@media screen and (max-width: 915px) and (orientation: landscape){
+  .section {
+    display: block;
+    width: 100vw;
+    height: 100%;
+  }
+}
+
+@media screen and (min-width: 421px) and (max-width: 1180px) and (orientation: portrait) {
+  .section {
+    display: block;
+    width: 100%;
+    height: 89vh;
+  }
+}
+
+.section-left {
+  padding: 1.5rem;
+  width: 60%;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+}
+
+.calendar {
+  display: grid;
+  width: 100%;
+  height: 65vh;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: repeat(1, auto) repeat(6, 1fr);
+}
+
+.greyed-out {
+  color: lightgray;
+}
+
+.calendar-header {
+  justify-content: space-evenly;
+  align-items: center;
+  border-bottom: 2px solid black;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+}
+
+.calendar-header h1,
+h2 {
+  margin-bottom: 1rem;
+}
+
+.top,
+.bottom {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.square {
+  padding: 10px;
+  font-size: 1rem;
+  text-align: left;
+}
+
+.weekday {
+  text-align: center;
+  line-height: 25px;
+}
+
+.day-number {
+  font-size: 1.5rem;
+}
+
+.calendar-buttons {
+  width: 5rem;
+  text-align: center;
+}
+
+.btn {
+  font-size: 2.5rem;
+  background-color: none;
+  border: none;
+  border-radius: 10px;
+  width: 3rem;
+}
+
+@media screen and (min-width: 320px) and (max-width: 420px) {
+  .section-left {
+    padding: 0;
+    width: 100%;
+  }
+
+  .calendar-header h1,
+  p,
+  h2 {
+    margin-bottom: 0rem;
+  }
+
+  .calendar {
+    height: 35vh;
+    width: 75%;
+  }
+
+  .square {
+    padding: 0.5rem;
+  }
+  .day-number {
+    font-size: 1.25rem;
+  }
+}
+
+@media screen and (min-width: 421px) and (max-width: 1180px) and (orientation: portrait) {
+  .section-left {
+    padding: 0;
+    width: 100%;
+  }
+
+  .calendar-header h1,
+  p,
+  h2 {
+    margin-bottom: 0rem;
+  }
+
+  .calendar {
+    height: 35vh;
+    width: 100%;
+  }
+
+  .square {
+    padding: 0.5rem;
+  }
+  .day-number {
+    font-size: 1.25rem;
+  }
+}
+
+@media screen and (max-width: 915px) and (orientation: landscape){
+  .section-left {
+    padding: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .calendar-header h1,
+  p,
+  h2 {
+    margin-bottom: 0rem;
+  }
+
+  .calendar {
+    height: 100%;
+    width: 100%;
+  }
+
+  .square {
+    padding: 0.5rem;
+  }
+  .day-number {
+    font-size: 1.25rem;
+  }
+}
+
+.section-right {
+  width: 40%;
+  padding: 2rem;
+  text-align: left;
+}
+
+.appointment-header {
+  color: white black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.appointment-header p,
+.appointment-header h1 {
+  margin-bottom: 0;
+}
+
+.winter {
+  background-image: url("./assets/images/winter.webp");
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.spring {
+  background-image: url("./assets/images/spring.webp");
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.summer {
+  background-image: url("./assets/images/summer.jpg");
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.fall {
+  background-image: url("./assets/images/fall.jpeg");
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.events {
+  display: flex;
+  height: 80%;
+  padding: 1rem;
+  font-size: 2rem;
+  justify-content: space-between;
+}
+
+.line {
+  margin-right: 1rem;
+  height: 100%;
+  background-color: white;
+  width: 5px;
+  border-radius: 5%;
+}
+
+.event-list {
+  background-color: rgba(0, 0, 0, 0.616);
+  padding: 3rem;
+  font-size: 1.5rem;
+  border-radius: 5px;
+  color: white;
+  width: 100%;
+}
+
+.event-list td {
+  padding-right: 0.5rem;
+}
+
+.event-bottom {
+  text-align: center;
+}
+
+.plus-icon,
+.minus-icon {
+  color: white;
+  font-size: 4rem;
+  background-color: rgba(0, 0, 0, 0.616);
+  border-radius: 50%;
+}
+
+@media screen and (min-width: 320px) and (max-width: 420px) {
+  .section-right {
+    padding: 0.25rem;
+    width: 100%;
+    height: 100%;
+  }
+
+  .appointment-header {
+    padding: 1rem;
+  }
+
+  .plus-icon,
+  .minus-icon {
+    font-size: 2.5rem;
+  }
+
+  .events {
+    min-height: 30vh;
+  }
+
+  .line {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 915) and (orientation: landscape){
+  
+}
+
+@media screen and (min-width: 421px) and (max-width: 1180px) and (orientation: portrait) {
+  .section-right {
+    padding: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .appointment-header {
+    padding: 2rem;
+  }
+
+  .plus-icon,
+  .minus-icon {
+    font-size: 3rem;
+  }
+
+  .events {
+    min-height: 100%;
+  }
+}
+
+@media screen and (max-width: 915px) and (orientation: landscape){
+  .section-right {
+    padding: 0;
+    width: 100%;
+  }
+  .appointment-header {
+    padding: 1rem;
+  }
+  
+  .plus-icon,
+  .minus-icon {
+    font-size: 3rem;
+  }
+}
+
+.modal {
+  background-color: #1a4743c5;
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  left: 0;
+  top: 0;
+}
+
+.show-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-container {
+  margin: 1rem auto;
+  background-color: lightgray;
+  border-radius: 10px;
+  padding: 3rem;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-gap: 20px;
+  align-items: center;
+  text-align: left;
+}
+
+label {
+  grid-column: 1/2;
+}
+
+input,
+button {
+  grid-column: 2/3;
+}
+
+.full-width {
+  grid-column: 1/3;
+}
+
+.today {
+  color: red;
+}
+
+.footer {
+  background-color: hsl(175, 100%, 5%);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 11vh;
+}
+
+.social-icon {
+  font-size: 1.75rem;
+  color: #26736b;
+}
+
+.social-icon:hover {
+  color: white;
+}
+
+.footer-link {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+@media screen and (min-width: 320px) and (max-width: 1368px) {
+  .footer {
+    height: 150px;
+  }
+}
