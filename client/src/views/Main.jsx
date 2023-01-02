@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect } from 'react'
 import { useState } from 'react'
+import AppointmentsPanel from '../components/AppointmentsPanel'
 import Calendar from '../components/Calendar'
 
 const Main = () => {
@@ -22,9 +23,11 @@ const Main = () => {
     setDay(day)
   }
 
+
   return (
     <div className="section">
       <Calendar appointments={appointments} heading={heading} weekDays={weekDays} onClickProp={handleClick}/>
+      <AppointmentsPanel appointments={appointments} heading={heading} weekDays={weekDays} day={day}/>
     </div>
   )
 }
