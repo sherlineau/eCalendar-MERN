@@ -243,7 +243,6 @@ h2 {
 
 .appointment-header {
   color: white black;
-  display: flex;
   justify-content: space-between;
   align-items: center;
 }
