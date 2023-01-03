@@ -120,7 +120,7 @@ const Calendar = (props) => {
       <CalendarHeader month={month} year={year} heading={heading} />
       <div className="content">
         <div className="calendar-buttons">
-          <AiOutlineArrowLeft onClick={(e) => pastMonth()} className="btn" />
+          <AiOutlineArrowLeft onClick={(e) => pastMonth()} className="button" />
         </div>
         <div className="calendar">
           {weekDays.map((w, i) => {
@@ -179,7 +179,7 @@ const Calendar = (props) => {
             : ""}
         </div>
         <div className="calendar-buttons">
-          <AiOutlineArrowRight onClick={(e) => nextMonth()} className="btn" />
+          <AiOutlineArrowRight onClick={(e) => nextMonth()} className="button" />
         </div>
       </div>
     </div>
