@@ -15,7 +15,6 @@ app.use(cookieParser());
 app.set('port', process.env.PORT || 3000);
 
 // routes
-require('./routes/test.routes')(app)
 require('./routes/user.routes')(app);
 require('./routes/Appointment.routes')(app)
 
