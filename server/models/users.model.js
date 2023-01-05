@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const { AppointmentSchema } = require("../models/appointments.model");
 
 const UserSchema = new mongoose.Schema(
   {
@@ -29,6 +30,8 @@ const UserSchema = new mongoose.Schema(
       required: [true, 'Password is required'],
       minLength: [8, 'Password must be at least 8 characters'],
     },
+
+    appointments: [AppointmentSchema]
   },
   { timestamps: true }
 );

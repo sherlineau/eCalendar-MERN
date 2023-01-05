@@ -1,11 +1,20 @@
 const { Appointment } = require("../models/appointments.model");
+const User = require("../models/users.model");
 
 module.exports = {
   // Create Function
-  newAppointment: (req, res) => {
-    Appointment.create(req.body)
-      .then((appointment) => res.json(appointment))
-      .catch((err) => res.status(400).json(err));
+  newAppointment: async (req, res) => {
+    try {
+      const newAppointment = new Appointment(req.body);
+      await newAppointment.save();
+      await User.findOneAndUpdate(
+        { _id: newAppointment.userId },
+        { $push: { appointments: newAppointment } }
+      );
+      res.json(newAppointment);
+    } catch (err) {
+      res.status(400).json(err);
+    }
   },
 
   // Read Functions

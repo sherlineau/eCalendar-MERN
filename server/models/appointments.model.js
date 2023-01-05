@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const AppointmentSchema = new mongoose.Schema(
   {
+    userId: String,
     title: {
       type: String,
       required: [true, " is required"],
@@ -28,4 +29,7 @@ const AppointmentSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports.Appointment = mongoose.model("Appointment", AppointmentSchema);
+module.exports = {
+  Appointment: mongoose.model("Appointment", AppointmentSchema),
+  AppointmentSchema
+}
