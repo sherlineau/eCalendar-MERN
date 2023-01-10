@@ -30,6 +30,6 @@ const AppointmentSchema = new mongoose.Schema(
 );
 
 module.exports = {
-  Appointment: mongoose.model("Appointment", AppointmentSchema),
-  AppointmentSchema
-}
+  AppointmentModel: mongoose.model("Appointment", AppointmentSchema),
+  AppointmentSchema,
+};
