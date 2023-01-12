@@ -102,7 +102,7 @@ class UserController {
   };
 
   logout = (req, res) => {
-    res.clearCookie("usertoken");
+    res.clearCookie("usertoken", {path: '/dashboard'});
     res.sendStatus(200);
   };
 
