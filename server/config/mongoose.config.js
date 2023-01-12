@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 DATABASE = require("../server");
 
 mongoose
-  .connect(`mongodb://127.0.0.1/${DATABASE}`, {
+  .connect(process.env.DATABASE_URL || `mongodb://127.0.0.1/${DATABASE}`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
