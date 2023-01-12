@@ -12,7 +12,7 @@ require("./config/mongoose.config");
 require("./config/jwt.config");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+app.use(cors({ credentials: true, origin: "https://sherlineau.github.io/eCalendar-MERN/" }));
 app.use(cookieParser());
 app.set("port", process.env.PORT || 3000);
 
