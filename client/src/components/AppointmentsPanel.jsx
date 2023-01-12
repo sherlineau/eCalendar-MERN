@@ -4,7 +4,7 @@ import FormModal from "./FormModal";
 import { AiOutlinePlus } from "react-icons/ai";
 
 const AppointmentsPanel = (props) => {
-  const { heading, weekDays, day, appointments } = props;
+  const { heading, weekDays, day, appointments, id } = props;
   const [showModal, setShowModal] = useState(false);
   const month = day.getMonth();
 
@@ -112,7 +112,7 @@ const AppointmentsPanel = (props) => {
           />
         </div>
         <div className={`modal ${showModal ? "show-modal" : ""}`}>
-          <FormModal onSubmitProp={closeModal} onClickProp={closeModal}/>
+          <FormModal onSubmitProp={closeModal} onClickProp={closeModal} userId={id}/>
         </div>
       </div>
     </div>
