@@ -37,7 +37,8 @@ class UserController {
 
   // READ
   getAllUsers = (req, res) => {
-    User.find().populate('appointments')
+    User.find()
+      .populate("appointments")
       .then((allUsers) => res.json(allUsers))
       .catch((err) => res.status(400).json(err));
   };
@@ -102,7 +103,7 @@ class UserController {
   };
 
   logout = (req, res) => {
-    res.clearCookie("usertoken", {path: '/dashboard'});
+    res.clearCookie("usertoken", { path: "/dashboard" });
     res.sendStatus(200);
   };
 
@@ -114,10 +115,18 @@ class UserController {
   */
   getLoggedInUser = (req, res) => {
     // use info stored in cookie to get id of logged in user and query db to find user with that id, return that users info
-    const decodedJwt = jwt.decode(JSON.parse(req.cookies.usertoken), { complete: true });
-    User.find({ _id: decodedJwt.payload.id })
-      .then((foundUser) => res.json(foundUser))
-      .catch((err) => res.json(err));
+    if (req.cookies.usertoken) {
+      const decodedJwt = jwt.decode(req.cookies.usertoken, { complete: true });
+      if (decodedJwt) {
+        User.find({ _id: decodedJwt.payload.id })
+          .then((foundUser) => res.json(foundUser))
+          .catch((err) => res.json(err));
+      } else {
+        res.status(401).json({ error: "Invalid token" });
+      }
+    } else {
+      res.status(401).json({ error: "Missing token" });
+    }
   };
 }
 
