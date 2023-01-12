@@ -26,7 +26,7 @@ class UserController {
           res.status(400).json({
             errors: {
               email: {
-                message: "Email is already taken, please provide another",
+                message: "is already taken, please provide another",
               },
             },
           });
