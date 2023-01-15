@@ -19,7 +19,7 @@ const FormModal = (props) => {
     let end = new Date(`${endDate}T${endTime}`);
     if (start > new Date() && end > start) {
       axios
-        .post(`http://localhost:8000/api/appointments/new`, {
+        .post(`https://ecalendar-api.onrender.com/api/appointments/new`, {
           userId,
           title,
           start,

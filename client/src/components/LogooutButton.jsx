@@ -6,7 +6,7 @@ const LogooutButton = () => {
   const navigate = useNavigate();
 
   const logout = (e) => {
-    axios.post(`http://localhost:8000/api/logout`)
+    axios.post(`https://ecalendar-api.onrender.com/api/logout`)
       .then((res) => navigate("/"));
   };
 
