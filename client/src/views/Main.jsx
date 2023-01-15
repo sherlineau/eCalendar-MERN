@@ -17,7 +17,7 @@ const Main = () => {
         setUser(res.data[0])
         setAppointments(res.data[0].appointments)
       })
-      .catch(err => navigate('/'))
+      .catch(err => console.log(err))
   })
 
   const heading = ["January","February","March","April","May","June","July","August","September","October","November","December"]
