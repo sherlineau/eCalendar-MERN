@@ -7,16 +7,8 @@
     "local": "docker run -p 28017:27017 -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=password --rm mongo:6",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jaytula/eCalendar-MERN.git"
-  },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jaytula/eCalendar-MERN/issues"
-  },
-  "homepage": "https://github.com/jaytula/eCalendar-MERN#readme",
   "dependencies": {
     "concurrently": "^7.6.0"
   }
