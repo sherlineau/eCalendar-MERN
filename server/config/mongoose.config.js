@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+mongoose.set('strictQuery', false);
+
 const DATABASE_URI = process.env.DATABASE_URI;
 
 mongoose
@@ -8,5 +10,5 @@ mongoose
   })
   .then(() => console.log("Established a connection to the database"))
   .catch((err) =>
-    console.log("Something went wrong when connecting to the database ", err)
+    console.log(`Something went wrong when connecting to the database: ${DATABASE_URI}`, err)
   );
