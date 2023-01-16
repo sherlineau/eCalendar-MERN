@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/jaytula/eCalendar-MERN/issues"
   },
-  "homepage": "https://github.com/jaytula/eCalendar-MERN#readme"
+  "homepage": "https://github.com/jaytula/eCalendar-MERN#readme",
+  "dependencies": {
+    "concurrently": "^7.6.0"
+  }
 }
