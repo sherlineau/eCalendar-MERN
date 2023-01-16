@@ -1,7 +1,6 @@
 const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-module.exports = DATABASE = "eCalendar_db";
 
 const app = express();
 
