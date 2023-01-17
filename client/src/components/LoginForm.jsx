@@ -22,7 +22,7 @@ const LoginForm = (props) => {
   const submitHandler = (e) => {
     e.preventDefault();
     axios
-      .post(`https://ecalendar-api.onrender.com/api/login`, user, {
+      .post(`/api/login`, user, {
         withCredentials: true,
       })
       .then((res) => navigate("/dashboard"))
@@ -31,7 +31,8 @@ const LoginForm = (props) => {
 
   const DemoUser = (e) => {
     axios
-      .post(`https://ecalendar-api.onrender.com/api/login`, demoUser, {
+      .post(`/api/login`, demoUser, {
+
         withCredentials: true,
       })
       .then((res) => navigate("/dashboard"))
