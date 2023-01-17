@@ -32,6 +32,7 @@ const LoginForm = (props) => {
   const DemoUser = (e) => {
     axios
       .post(`/api/login`, demoUser, {
+
         withCredentials: true,
       })
       .then((res) => navigate("/dashboard"))

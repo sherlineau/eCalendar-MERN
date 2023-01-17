@@ -26,6 +26,7 @@ const RegisterForm = (props) => {
     e.preventDefault();
     axios
       .post(`/api/register`, user, {
+
         withCredentials: true,
       })
       .then((res) => navigate("/dashboard"))

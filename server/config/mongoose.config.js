@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+
 mongoose.set('strictQuery', false);
 
 const DATABASE_URI = process.env.DATABASE_URI;
