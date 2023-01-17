@@ -22,7 +22,7 @@ const LoginForm = (props) => {
   const submitHandler = (e) => {
     e.preventDefault();
     axios
-      .post(`http://localhost:8000/api/login`, user, {
+      .post(`/api/login`, user, {
         withCredentials: true,
       })
       .then((res) => navigate("/dashboard"))
@@ -31,7 +31,7 @@ const LoginForm = (props) => {
 
   const DemoUser = (e) => {
     axios
-      .post(`http://localhost:8000/api/login`, demoUser, {
+      .post(`/api/login`, demoUser, {
         withCredentials: true,
       })
       .then((res) => navigate("/dashboard"))

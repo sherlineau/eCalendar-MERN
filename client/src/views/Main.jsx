@@ -12,7 +12,7 @@ const Main = () => {
   const [day, setDay] = useState(new Date());
 
   useEffect(()=> {
-    axios.get(`http://localhost:8000/api/user/getloggedinuser`, {withCredentials: true})
+    axios.get(`/api/user/getloggedinuser`, {withCredentials: true})
       .then(res => {
         setUser(res.data[0])
         setAppointments(res.data[0].appointments)
