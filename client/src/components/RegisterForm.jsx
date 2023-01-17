@@ -25,7 +25,8 @@ const RegisterForm = (props) => {
   const submitHandler = (e) => {
     e.preventDefault();
     axios
-      .post(`http://localhost:8000/api/register`, user, {
+      .post(`/api/register`, user, {
+
         withCredentials: true,
       })
       .then((res) => navigate("/dashboard"))

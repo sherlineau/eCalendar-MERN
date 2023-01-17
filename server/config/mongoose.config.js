@@ -1,12 +1,15 @@
 const mongoose = require("mongoose");
-DATABASE = require("../server");
+
+mongoose.set('strictQuery', false);
+
+const DATABASE_URI = process.env.DATABASE_URI;
 
 mongoose
-  .connect(`mongodb://127.0.0.1/${DATABASE}`, {
+  .connect(DATABASE_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
   .then(() => console.log("Established a connection to the database"))
   .catch((err) =>
-    console.log("Something went wrong when connecting to the database ", err)
+    console.log(`Something went wrong when connecting to the database: ${DATABASE_URI}`, err)
   );

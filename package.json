@@ -1,0 +1,24 @@
+{
+  "name": "ecalendar-mern",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd server && node server.js",
+    "build:client": "cd client && npm install && npm run build",
+    "build:server": "cd server && npm install",
+    "local": "concurrently \"npm run db\" \"npm run client\" \"npm run server\"",
+    "db": "docker run -p 28017:27017 -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=password --rm mongo:6",
+    "client": "cd client && BROWSER=none npm start",
+    "server": "wait-on tcp:localhost:28017 && wait-on http://localhost:3000 && cd server && node server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^7.6.0"
+  },
+  "devDependencies": {
+    "wait-on": "^7.0.1"
+  }
+}
