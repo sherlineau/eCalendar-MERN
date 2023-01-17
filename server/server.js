@@ -12,6 +12,7 @@ require("dotenv").config();
 // configs
 require("./config/mongoose.config");
 require("./config/jwt.config");
+require("./config/corsOptions.config");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
