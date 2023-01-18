@@ -27,7 +27,7 @@ const LoginForm = (props) => {
         withCredentials: true,
       })
       .then((res) => navigate("/dashboard"))
-      .catch((err) => console.log(err.response));
+      .catch((err) => setError(true));
   };
 
   const DemoUser = (e) => {
@@ -36,7 +36,7 @@ const LoginForm = (props) => {
         withCredentials: true,
       })
       .then((res) => navigate("/dashboard"))
-      .catch((err) => console.log(err.response));
+      .catch((err) => setError(true));
   };
 
   const clickHandler = (e) => {
