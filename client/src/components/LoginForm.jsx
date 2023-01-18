@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 const LoginForm = (props) => {
   const navigate = useNavigate();
   const { onClickProp } = props;
+  const [error, setError] = useState(false);
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -32,7 +33,6 @@ const LoginForm = (props) => {
   const DemoUser = (e) => {
     axios
       .post(`/api/login`, demoUser, {
-
         withCredentials: true,
       })
       .then((res) => navigate("/dashboard"))
@@ -69,12 +69,15 @@ const LoginForm = (props) => {
               className="form-control"
             />
           </div>
+          {error ? <p style={{ color: "red" }}>Invalid credentials</p> : ""}
           <button onClick={(e) => clickHandler()} className="mt-3 btn btn-link">
             New User? Register here!
           </button>
           <div className="d-grid mt-3">
             <div className="btn-group">
-              <button onClick={(e) => DemoUser()} className="btn btn-primary">Demo User</button>
+              <button onClick={(e) => DemoUser()} className="btn btn-primary">
+                Demo User
+              </button>
               <button className="btn btn-warning"> Login </button>
             </div>
           </div>
